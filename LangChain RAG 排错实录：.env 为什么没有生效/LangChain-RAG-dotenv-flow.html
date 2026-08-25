@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 1200px; height: 675px; background: #f6f8f9; color: #18242b; font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    .page { padding: 48px 60px; }
+    h1 { margin: 0; font-size: 33px; letter-spacing: 0; } .lead { margin-top: 8px; color: #52626d; font-size: 18px; }
+    .lane { position: relative; margin-top: 54px; display: grid; grid-template-columns: 1fr 88px 1fr 88px 1fr; align-items: center; }
+    .box { min-height: 186px; padding: 26px 28px; border: 1px solid #c7d1d5; border-radius: 8px; background: white; }
+    .box h2 { margin: 0 0 16px; font-size: 25px; } .box p { margin: 7px 0; font-size: 18px; line-height: 1.55; }
+    .env { border-top: 6px solid #328a85; } .process { border-top: 6px solid #c7574f; background: #fff8f7; } .result { border-top: 6px solid #3577a8; }
+    .arrow { position: relative; height: 2px; background: #8ca0a8; } .arrow::after { content: ""; position: absolute; right: 0; top: -5px; width: 11px; height: 11px; border-top: 2px solid #8ca0a8; border-right: 2px solid #8ca0a8; transform: rotate(45deg); }
+    .priority { position: absolute; top: -38px; left: 420px; color: #b54b43; font-size: 18px; font-weight: 700; }
+    .bottom { margin-top: 58px; padding: 18px 22px; border-left: 5px solid #328a85; background: #eaf4f3; font-size: 19px; line-height: 1.65; }
+    code { padding: 2px 6px; border-radius: 3px; background: #e9edef; font-family: Consolas, monospace; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>为什么 <code>import "dotenv/config"</code> 仍然会读到旧配置？</h1>
+    <div class="lead">dotenv 默认只补充缺失变量，不会覆盖 Node 进程已继承的同名变量。</div>
+    <section class="lane">
+      <article class="box env"><h2>项目 .env</h2><p>正确的兼容地址</p><p>正确的 API Key</p><p>模型与 embedding 配置</p></article>
+      <div class="arrow"></div>
+      <article class="box process"><h2>已启动的终端进程</h2><p><strong>先继承旧环境变量</strong></p><p>dotenv 发现同名变量</p><p>默认不覆盖</p></article>
+      <div class="arrow"></div>
+      <article class="box result"><h2>实际 API 请求</h2><p>请求旧网关</p><p>返回不兼容的 <code>data: null</code></p><p>SDK 内部报 TypeError</p></article>
+      <div class="priority">优先级更高</div>
+    </section>
+    <div class="bottom"><strong>排查原则：</strong>比较 <code>.env</code> 文件值与 <code>process.env</code> 实际值，再直接检查 API 原始响应。不要只根据 SDK 堆栈判断根因。</div>
+  </main>
+</body>
+</html>

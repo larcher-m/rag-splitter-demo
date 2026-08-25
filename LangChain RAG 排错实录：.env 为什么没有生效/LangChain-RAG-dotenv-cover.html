@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #101820; color: #f5f7fa; font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    .canvas { position: relative; width: 1280px; height: 720px; padding: 78px 92px; background: linear-gradient(118deg, #101820 0 58%, #132e35 58% 100%); }
+    .eyebrow { color: #65d6c5; font-size: 25px; font-weight: 700; letter-spacing: 2px; }
+    h1 { margin: 24px 0 18px; width: 765px; font-size: 59px; line-height: 1.22; letter-spacing: 0; }
+    .subtitle { width: 690px; color: #b9c8d2; font-size: 26px; line-height: 1.65; }
+    .tag { display: inline-block; margin-top: 40px; padding: 10px 17px; border: 1px solid #3a7173; border-radius: 4px; color: #8fe4d8; font-size: 21px; }
+    .diagram { position: absolute; right: 72px; top: 104px; width: 380px; height: 500px; }
+    .node { position: absolute; width: 212px; min-height: 72px; padding: 14px 18px; border: 1px solid #447782; border-radius: 7px; background: #17333b; font-size: 22px; font-weight: 700; text-align: center; }
+    .n1 { top: 8px; left: 84px; } .n2 { top: 137px; left: 0; border-color: #bd675f; background: #3a2425; color: #ffb5ab; } .n3 { top: 266px; left: 84px; } .n4 { top: 395px; left: 84px; border-color: #65d6c5; color: #8fe4d8; }
+    .line { position: absolute; width: 2px; height: 57px; background: #5f9298; left: 190px; } .l1 { top: 80px; } .l2 { top: 209px; } .l3 { top: 338px; }
+    .arrow { position: absolute; left: 184px; width: 14px; height: 14px; border-right: 2px solid #5f9298; border-bottom: 2px solid #5f9298; transform: rotate(45deg); } .a1 { top: 126px; } .a2 { top: 255px; } .a3 { top: 384px; }
+    .note { position: absolute; right: 0; bottom: 0; color: #7caeb2; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <div class="eyebrow">LANGCHAIN RAG DEBUG NOTES</div>
+    <h1>.env 为什么没有生效？</h1>
+    <div class="subtitle">一次由旧环境变量覆盖引起的<br>向量化报错排查实录</div>
+    <div class="tag">dotenv · Node.js · Embeddings</div>
+    <section class="diagram" aria-label="配置优先级流程图">
+      <div class="node n1">.env 配置</div><div class="line l1"></div><div class="arrow a1"></div>
+      <div class="node n2">旧系统环境变量</div><div class="line l2"></div><div class="arrow a2"></div>
+      <div class="node n3">Node 实际生效值</div><div class="line l3"></div><div class="arrow a3"></div>
+      <div class="node n4">Embedding 请求</div>
+      <div class="note">找回真正生效的配置</div>
+    </section>
+  </main>
+</body>
+</html>
